@@ -12,19 +12,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Pin Actions 到完整的 40 位 Commit SHA (最嚴謹防範供應鏈攻擊)
       - name: Checkout code
-        uses: actions/checkout@v4
-        
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@0b93645e9fea7318edeed24e474334f6823ec606 # v5.3.0
         with:
           python-version: '3.10'
-          
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install flake8
-          
+
       - name: Run static analysis
         run: |
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
